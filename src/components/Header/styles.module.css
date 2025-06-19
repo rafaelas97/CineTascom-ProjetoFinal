@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #252424;
+  color: white;
+  gap: 10px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.formBusca {
+  flex-grow: 1;
+  display: flex;
+  max-width: 400px;
+}
+
+.inputBusca {
+  flex-grow: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.btnBusca {
+  padding: 6px 15px;
+  background-color: #ff6600;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.btnCadastro {
+  padding: 8px 15px;
+  background-color: #0080ff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}

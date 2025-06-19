@@ -1,0 +1,32 @@
+.footer {
+  padding: 12px;
+  background-color: #181631;
+  color: white;
+  text-align: center;
+}
+
+.slogan {
+  font-size:larger;
+  margin-bottom: 18px;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.social a {
+  color: white;
+  transition: color 0.3s;
+}
+
+.social a:hover {
+  color: #f4c10f;
+}
+
+.footer strong {
+  color: #f4c10f;
+}

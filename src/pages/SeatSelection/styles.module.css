@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap:56px;
+  padding: 20px;
+  background-color: #111;
+  color: white;
+}
+
+.leftSide {
+  flex: 1;
+}
+
+.screen {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #666;
+  padding: 4px;
+}
+
+.screen img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.seat {
+  padding: 10px;
+  background-color: #444;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+
+.seat:hover {
+  background-color: #666;
+}
+
+.occupied {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.selected {
+  background-color: #0f0;
+}
+
+.confirmBtn {
+  padding: 10px 20px;
+  background-color: #f60;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sidebar {
+  width: 300px;
+  background-color: #110e2b;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.poster {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.posterTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
