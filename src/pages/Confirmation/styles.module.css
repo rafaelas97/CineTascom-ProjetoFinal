@@ -1,6 +1,12 @@
 .container {
   padding: 2rem;
   text-align: center;
+  background-color: #0E0033;
+  color: #c2c2c2
+}
+
+h2,p{
+  color:#0E0033;
 }
 
 .box {

@@ -2,8 +2,8 @@
   display: flex;
   gap: 32px;
   padding: 32px;
-  max-width: 1050px;
-  
+  max-width: 1500px;
+  background-color: #0E0033;
   align-items: flex-start;
   flex-wrap: wrap;
 }
@@ -24,17 +24,18 @@
 
 .details h1 {
   font-size: 42px;
-  color: #222;
+  color: #c4c1c1;
 }
 
 .details h3{
     font-size: 20px;
+    color: #c4c1c1;
 }
 
 .description {
   font-size: 16px;
   line-height: 1.6;
-  color: #333;
+  color: #d4d4d4;
   text-align: justify;
 }
 

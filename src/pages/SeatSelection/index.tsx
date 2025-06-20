@@ -36,7 +36,7 @@ export default function SeatSelection() {
    useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPosterIndex((prev) => (prev + 1) % posters.length);
-    }, 4000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -67,7 +67,6 @@ export default function SeatSelection() {
           Confirmar Reserva
         </button>
       </div>
-
       <div className={styles.sidebar}>
         <h2>Em cartaz</h2>
         <img

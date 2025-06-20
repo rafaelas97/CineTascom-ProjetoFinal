@@ -22,7 +22,7 @@ export default function Confirmation() {
     if (dados) {
       const parsed = JSON.parse(dados);
       setReserva(parsed);
-      setTipoIngresso(Array(parsed.assentos.length).fill("inteira")); // valor inicial
+      setTipoIngresso(Array(parsed.assentos.length).fill("inteira")); 
     }
   }, []);
 
@@ -31,7 +31,7 @@ export default function Confirmation() {
 
   const calcularValorTotal = () => {
     return tipoIngresso.reduce((acc, tipo) => {
-      return acc + (tipo === "inteira" ? 20 : 10); // valores fictícios
+      return acc + (tipo === "inteira" ? 45 : 22.50); 
     }, 0);
   };
 
