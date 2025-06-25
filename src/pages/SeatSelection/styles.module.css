@@ -3,7 +3,7 @@
   justify-content: space-between;
   gap:56px;
   padding: 20px;
-  background-color: #111;
+  background-color: #0D0032;
   color: white;
 }
 
@@ -66,7 +66,7 @@
 
 .sidebar {
   width: 300px;
-  background-color: #110e2b;
+  background-color: #0a0220;
   padding: 15px;
   border-radius: 10px;
   text-align: center;

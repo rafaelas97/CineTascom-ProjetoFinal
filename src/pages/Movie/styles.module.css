@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-width: 800px;
 }
 
 .details h1 {
@@ -47,7 +48,7 @@
 }
 
 .scheduleButtons button {
-  background-color: #2ecc71;
+  background-color: #4536e6;
   color: white;
   border: none;
   border-radius: 8px;

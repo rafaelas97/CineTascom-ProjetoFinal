@@ -51,7 +51,7 @@ export default function SeatSelection() {
 
         <div className={styles.grid}>
           {initialSeats.map((seat) => (
-            <button
+            <button 
               key={seat.id}
               className={`${styles.seat}
                 ${!seat.isAvailable ? styles.occupied : ""}

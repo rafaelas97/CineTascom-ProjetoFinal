@@ -26,14 +26,15 @@ export default function Confirmation() {
     }
   }, []);
 
-  const [filmeId, horario] = reserva?.sessao.split("-") || [];
+  if (!reserva) return <p>Carregando reserva...</p>;
+
+  const [filmeId] = reserva.sessao.split("-");
   const filme = movies.find((m) => m.id === Number(filmeId));
 
-  const calcularValorTotal = () => {
-    return tipoIngresso.reduce((acc, tipo) => {
-      return acc + (tipo === "inteira" ? 45 : 22.50); 
-    }, 0);
-  };
+  const calcularValorTotal = () =>
+    tipoIngresso.reduce((acc, tipo) => acc + (tipo === "inteira" ? 45 : 22.50),
+     0
+);
 
   const finalizarCompra = () => {
     if (!nome || !email || !cpf || !pagamento) {
@@ -46,7 +47,7 @@ export default function Confirmation() {
       email,
       cpf,
       filme: filme?.title,
-      horario,
+     
       assentos: reserva?.assentos,
       tipoIngresso,
       pagamento,
@@ -64,12 +65,26 @@ export default function Confirmation() {
   return (
     <div className={styles.container}>
       <h1>Finalizar Compra</h1>
-
       <div className={styles.box}>
-        <h2>{filme?.title}</h2>
-        <p><strong>Horário:</strong> {horario}</p>
-        <p><strong>Assentos:</strong> {reserva.assentos.join(", ")}</p>
+        <div className={styles.content}>
+          {filme?.poster && (
+            <img src={filme.poster} alt={`Pôster de ${filme?.title}`} 
+            className={styles.posterImg} />
+          )}
+          <div className={styles.infos}>
+            <h2>{filme?.title}</h2>
+            {filme?.caption && (
+              <p className={styles.caption}>{filme.caption}</p>
+            )}
+            <p>
+              <strong>Horário:</strong> {reserva.sessao}
+            </p>
+            <p>
+              <strong>Assentos:</strong> {reserva.assentos.join(", ")}
+            </p>
+        </div>
       </div>
+    </div>
 
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <input type="text" placeholder="Nome completo" value={nome} onChange={(e) => setNome(e.target.value)} />
@@ -85,8 +100,8 @@ export default function Confirmation() {
               novo[index] = e.target.value;
               setTipoIngresso(novo);
             }}>
-              <option value="inteira">Inteira - R$20,00</option>
-              <option value="meia">Meia - R$10,00</option>
+              <option value="inteira">Inteira - R$45,00</option>
+              <option value="meia">Meia - R$22,50</option>
             </select>
           </div>
         ))}
@@ -100,7 +115,7 @@ export default function Confirmation() {
           <option value="pix">PIX</option>
         </select>
 
-        <h3>Total: R${calcularValorTotal()},00</h3>
+        <h3>Total: R${calcularValorTotal().toFixed(2).replace(".",",")}</h3>
 
         <button type="button" onClick={finalizarCompra}>
           Confirmar e Finalizar Compra

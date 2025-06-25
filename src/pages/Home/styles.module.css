@@ -15,9 +15,9 @@ h1{
 
 .carousel {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
   overflow-x: auto;
-  scroll-behavior: smooth;
+  color: #0E0033;
   padding-bottom: 1rem;
 }
 
