@@ -8,7 +8,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const handleCadastroClick = () => {
-    navigate("/cadastro");
+    navigate("/");
   };
 
   const handleBuscaChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { seats as initialSeats } from "../../data/seats";
 import { posters } from "../../data/posters";
 import styles from "./styles.module.css";
+import { movies } from "../../data/movies";
 
 export default function SeatSelection() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentPosterIndex, setCurrentPosterIndex] = useState(0);
-
+  const [occupiedSeats, setOccupiedSeats] = useState<number[]>([]);
   const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
 
   const toggleSeat = (seatId: number) => {
@@ -24,11 +25,22 @@ export default function SeatSelection() {
       alert("Selecione pelo menos um assento!");
       return;
     }
+    const [filmeId, horario] = id!.split("-");
+    const filme = movies.find((m) => m.id === Number(filmeId))
 
     localStorage.setItem("reserva", JSON.stringify({
+      filme: filme?.title || "Filme desconhecido",
+      horario,
       sessao: id,
       assentos: selectedSeats
     }));
+
+    const ocupadosSalvos = JSON.parse(localStorage.getItem("assentosOcupados") || "{}" );
+    const atual = ocupadosSalvos[id!] || [];
+    const atualizados = [...new Set([...atual, ...selectedSeats])];
+
+    ocupadosSalvos[id!] = atualizados;
+    localStorage.setItem("assentosOcupados", JSON.stringify(ocupadosSalvos));
 
     navigate("/confirmacao");
   };
@@ -37,6 +49,9 @@ export default function SeatSelection() {
     const interval = setInterval(() => {
       setCurrentPosterIndex((prev) => (prev + 1) % posters.length);
     }, 2500);
+    const ocupadosSalvos = JSON.parse(localStorage.getItem("assentosOcupados") || "{}");
+    setOccupiedSeats(ocupadosSalvos[id!] || []);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -54,9 +69,9 @@ export default function SeatSelection() {
             <button 
               key={seat.id}
               className={`${styles.seat}
-                ${!seat.isAvailable ? styles.occupied : ""}
+                ${(!seat.isAvailable || occupiedSeats.includes(seat.id)) ? styles.occupied : ""}
                 ${selectedSeats.includes(seat.id) ? styles.selected : ""}`}
-              disabled={!seat.isAvailable}
+              disabled={!seat.isAvailable || occupiedSeats.includes(seat.id)}
               onClick={() => toggleSeat(seat.id)} >
               {seat.id}
             </button>

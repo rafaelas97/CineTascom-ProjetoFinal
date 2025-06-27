@@ -4,6 +4,8 @@ import { movies } from "../../data/movies";
 import styles from "./styles.module.css";
 
 interface Reserva {
+  filme: string;
+  horario: string;
   sessao: string;
   assentos: number[];
 }
@@ -30,7 +32,7 @@ export default function Confirmation() {
 
   if (!reserva) return <p>Carregando reserva...</p>;
 
-  const [filmeId] = reserva.sessao.split("-");
+  const [filmeId, horario] = reserva.sessao.split("-");
   const filme = movies.find((m) => m.id === Number(filmeId));
 
   const calcularValorTotal = () =>
@@ -48,7 +50,8 @@ export default function Confirmation() {
       nome,
       email,
       cpf,
-      filme: filme?.title,
+      filme: reserva.filme,
+      horario: reserva.horario,
      
       assentos: reserva?.assentos,
       tipoIngresso,
@@ -90,7 +93,7 @@ export default function Confirmation() {
               <p className={styles.caption}>{filme.caption}</p>
             )}
             <p>
-              <strong>Horário:</strong> {reserva.sessao}
+              <strong>Horário:</strong> {horario}
             </p>
             <p>
               <strong>Assentos:</strong> {reserva.assentos.join(", ")}
