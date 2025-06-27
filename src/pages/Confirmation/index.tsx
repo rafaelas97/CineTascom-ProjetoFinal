@@ -16,6 +16,8 @@ export default function Confirmation() {
   const [cpf, setCpf] = useState("");
   const [tipoIngresso, setTipoIngresso] = useState<string[]>([]);
   const [pagamento, setPagamento] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+
 
   useEffect(() => {
     const dados = localStorage.getItem("reserva");
@@ -55,14 +57,25 @@ export default function Confirmation() {
     };
 
     console.log("🧾 Compra finalizada:", resumo);
-    alert("Compra realizada com sucesso!");
+    setShowSuccess(true);
     localStorage.removeItem("reserva");
-    navigate("/");
   };
-
-  if (!reserva) return <p>Carregando reserva...</p>;
-
   return (
+    <>
+      {showSuccess && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2>Compra realizada com sucesso!</h2>
+            <p> Um e-mail com o comprovante será enviado em instantes. <br />
+            Aproveite o filme!
+            </p>
+            <button
+              className={styles.modalButton}
+              onClick={() => navigate("/")} > OK
+            </button>
+          </div>
+        </div>
+      )}
     <div className={styles.container}>
       <h1>Finalizar Compra</h1>
       <div className={styles.box}>
@@ -85,8 +98,8 @@ export default function Confirmation() {
         </div>
       </div>
     </div>
-
-      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}> 
+        <h2>Preencha os campos</h2>
         <input type="text" placeholder="Nome completo" value={nome} onChange={(e) => setNome(e.target.value)} />
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type="text" placeholder="CPF" value={cpf} onChange={(e) => setCpf(e.target.value)} />
@@ -117,10 +130,10 @@ export default function Confirmation() {
 
         <h3>Total: R${calcularValorTotal().toFixed(2).replace(".",",")}</h3>
 
-        <button type="button" onClick={finalizarCompra}>
+        <button id="final" type="button" onClick={finalizarCompra}>
           Confirmar e Finalizar Compra
         </button>
       </form>
     </div>
   );
-}
+</>)}

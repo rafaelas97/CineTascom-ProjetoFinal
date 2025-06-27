@@ -1,5 +1,5 @@
-import type { Movie } from "../data/movies";
-import styles from "./styles.module.css";
+import type { Movie } from "../../data/movies";
+import styles from "../Cards/styles.module.css";
 import { Link } from "react-router-dom";
 
 interface Props {

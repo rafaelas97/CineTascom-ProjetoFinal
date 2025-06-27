@@ -67,6 +67,8 @@ export default function SeatSelection() {
           Confirmar Reserva
         </button>
       </div>
+
+      
       <div className={styles.sidebar}>
         <h2>Em cartaz</h2>
         <img

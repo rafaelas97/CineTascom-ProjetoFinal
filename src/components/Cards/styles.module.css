@@ -10,17 +10,20 @@
   border: none;
 }
 
+.card h2{
+  color: #0E0033;
+}
+.card p{
+  color: #5e5e5e;
+}
+
 .card:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 .card img {
   width: 240px;
   height: 350px;
   border-radius: 10px;
-}
-
-h2,p{
-  color: #5e20c2;
 }
 
 button {
@@ -35,6 +38,34 @@ button {
   transition: background 0.3s;
 }
 
-button:hover {
-  background: linear-gradient(to right, #6343ff, #5e20c2, #5d11d8);
+.container {
+  padding: 16px;
+  background-color: #0E0033;
+}
+
+h1{
+  color:#d5d5d5
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  color: #0E0033;
+  padding-bottom: 1rem;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 10px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
 }

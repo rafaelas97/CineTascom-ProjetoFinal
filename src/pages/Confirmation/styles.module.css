@@ -86,9 +86,9 @@ h2,p{
   gap: 16px;
 }
 
- button {
+button {
   padding: 14px ;
-  background:#4536e6;
+  background:#3668e6;
   color: white;
   border: none;
   border-radius: 8px;
@@ -101,3 +101,42 @@ h2,p{
 button:hover {
   background: linear-gradient(to right, #6343ff, #5e20c2, #5d11d8);
 }
+
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; 
+}
+
+.modalContent {
+  background: #fff;
+  padding: 28px;
+  border-radius: 12px;
+  max-width: 90%;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+.modalContent h2{
+  color: #e6851e;
+}
+.modalContent p{
+  color: #371075b2;
+}
+
+.modalButton {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #8b5cf6;    
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
