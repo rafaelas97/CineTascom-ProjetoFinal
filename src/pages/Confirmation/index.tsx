@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { movies } from "../../data/movies";
 import styles from "./styles.module.css";
+import { auth } from "../../services/firebase"; 
+import { enviarEmailConfirmacao } from "../../services/emailService";
 
 interface Reserva {
   filme: string;
@@ -28,6 +30,10 @@ export default function Confirmation() {
       setReserva(parsed);
       setTipoIngresso(Array(parsed.assentos.length).fill("inteira")); 
     }
+    const userEmail = auth.currentUser?.email;
+    if (userEmail) {
+      setEmail(userEmail);
+    }
   }, []);
 
   if (!reserva) return <p>Carregando reserva...</p>;
@@ -51,8 +57,7 @@ export default function Confirmation() {
       email,
       cpf,
       filme: reserva.filme,
-      horario: reserva.horario,
-     
+      time: reserva.horario,
       assentos: reserva?.assentos,
       tipoIngresso,
       pagamento,
@@ -60,9 +65,18 @@ export default function Confirmation() {
     };
 
     console.log("🧾 Compra finalizada:", resumo);
-    setShowSuccess(true);
-    localStorage.removeItem("reserva");
-  };
+    enviarEmailConfirmacao({
+    name: nome,
+    email,
+    movie: filme?.title || "",
+    time: horario,
+    seats: reserva.assentos.join(", "),
+    total: calcularValorTotal().toFixed(2).replace(".", ","),
+  });
+
+  setShowSuccess(true);
+  localStorage.removeItem("reserva");
+};
   return (
     <>
       {showSuccess && (
@@ -93,7 +107,7 @@ export default function Confirmation() {
               <p className={styles.caption}>{filme.caption}</p>
             )}
             <p>
-              <strong>Horário:</strong> {horario}
+              <strong>Horário:</strong> {reserva.horario}
             </p>
             <p>
               <strong>Assentos:</strong> {reserva.assentos.join(", ")}

@@ -1,0 +1,41 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+h2{
+    color: #0D0032;
+}
+
+.modal {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+  box-shadow: 0 0 20px #00000040;
+}
+
+.modal input,
+.modal button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.btnFechar {
+  background-color: crimson;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}

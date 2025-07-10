@@ -77,3 +77,15 @@
   background-color: #352066;
 }
 
+.userBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userBox span {
+  font-weight: bold;
+  color: #fff;
+}
+
+

@@ -25,29 +25,32 @@ export default function SeatSelection() {
       alert("Selecione pelo menos um assento!");
       return;
     }
-    const [filmeId, horario] = id!.split("-");
+    const [filmeId, horarioSelecionado] = (id || "").split("-");
     const filme = movies.find((m) => m.id === Number(filmeId))
 
-    localStorage.setItem("reserva", JSON.stringify({
+    const reserva = {
       filme: filme?.title || "Filme desconhecido",
-      horario,
-      sessao: id,
+      horario: horarioSelecionado,
+      sessao: `${filmeId}-${horarioSelecionado}`,
       assentos: selectedSeats
-    }));
+    };
+    localStorage.setItem("reserva", JSON.stringify(reserva));
+    console.log("🪑 Reserva salva:", reserva);
+    
 
-    const ocupadosSalvos = JSON.parse(localStorage.getItem("assentosOcupados") || "{}" );
-    const atual = ocupadosSalvos[id!] || [];
-    const atualizados = [...new Set([...atual, ...selectedSeats])];
+     const ocupadosSalvos = JSON.parse(localStorage.getItem("assentosOcupados") || "{}" );
+      const atual = ocupadosSalvos[id!] || [];
+      const atualizados = [...new Set([...atual, ...selectedSeats])];
 
-    ocupadosSalvos[id!] = atualizados;
-    localStorage.setItem("assentosOcupados", JSON.stringify(ocupadosSalvos));
+      ocupadosSalvos[id!] = atualizados;
+      localStorage.setItem("assentosOcupados", JSON.stringify(ocupadosSalvos));
 
     navigate("/confirmacao");
   };
 
    useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentPosterIndex((prev) => (prev + 1) % posters.length);
+      setCurrentPosterIndex((prev: number) => (prev + 1) % posters.length);
     }, 2500);
     const ocupadosSalvos = JSON.parse(localStorage.getItem("assentosOcupados") || "{}");
     setOccupiedSeats(ocupadosSalvos[id!] || []);

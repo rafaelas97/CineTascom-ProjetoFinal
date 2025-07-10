@@ -1,16 +1,21 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../Header/styles.module.css";
 import { movies } from "../../data/movies";
 import { type Movie } from "../../@types/Movie"; 
+import LoginForm from "../LoginForm"; 
+import { useEffect, useState } from "react";
+import { listenUser, logout } from "../../services/authService"; 
+import { type User } from "firebase/auth";
+
 
 export default function Header() {
   const [busca, setBusca] = useState("");
   const [sugestoes, setSugestoes] = useState<Movie[]>([]);
   const navigate = useNavigate();
+  const [mostrarModal, setMostrarModal] = useState(false);
 
   const handleCadastroClick = () => {
-    navigate("/");
+    setMostrarModal(true);
   };
 
   const handleBuscaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +48,15 @@ export default function Header() {
     navigate(`/filme/${filme.id}`);
   };
 
+  const [usuario, setUsuario] = useState<User | null>(null);
+  useEffect(() => {
+  listenUser((user) => {
+    setUsuario(user);
+  });
+}, []);
+
+
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>CineTascom</div>
@@ -67,9 +81,17 @@ export default function Header() {
           Buscar
         </button>
       </form>
+      {usuario ? (
+      <div className={styles.userBox}>
+        <span>Olá, {usuario.displayName || usuario.email}</span>
+        <button onClick={logout}>Sair</button>
+      </div>
+    ) : (
       <button onClick={handleCadastroClick} className={styles.btnCadastro}>
         Cadastrar
       </button>
+    )}
+    {mostrarModal && <LoginForm onClose={() => setMostrarModal(false)} />}
     </header>
   );
 }
